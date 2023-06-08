@@ -1,0 +1,3 @@
+Rex;2;Preto
+Garfield;5;Amarelo
+Koda;1;Laranja
