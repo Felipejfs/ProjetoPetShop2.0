@@ -29,7 +29,7 @@ public class SistemaPetShopTest {
 
     @Test
     public void removerPetTeste() {
-        Pet pet = sistemaPet.buscarPet("Rex");
+        Pet pet = sistemaPet.buscarPetNome("Rex");
         sistemaPet.removerPet(pet);
         List<Pet> pets = sistemaPet.listarPets();
         Assertions.assertEquals(2, pets.size());
@@ -38,14 +38,14 @@ public class SistemaPetShopTest {
 
     @Test
     public void buscarPetExistenteTeste() {
-        Pet pet = sistemaPet.buscarPet("Bolinha");
+        Pet pet = sistemaPet.buscarPetNome("Bolinha");
         Assertions.assertNotNull(pet);
         Assertions.assertEquals("Bolinha", pet.getNome());
     }
 
     @Test
     public void buscarPetInexistenteTeste() {
-        Pet pet = sistemaPet.buscarPet("Garfield");
+        Pet pet = sistemaPet.buscarPetNome("Garfield");
         Assertions.assertNull(pet);
     }
 }

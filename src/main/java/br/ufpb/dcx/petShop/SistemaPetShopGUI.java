@@ -25,7 +25,7 @@ public class SistemaPetShopGUI extends JFrame{
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        JPanel inputPanel = new JPanel(new GridLayout(6, 4));
+        JPanel inputPanel = new JPanel(new GridLayout(8, 4));
         inputPanel.add(new JLabel("Nome:"));
         nomeField = new JTextField();
         inputPanel.add(nomeField);
@@ -73,12 +73,26 @@ public class SistemaPetShopGUI extends JFrame{
             }
         });
 
-        JButton buscarButton = new JButton("Buscar");
-        buscarButton.addActionListener(new ActionListener() {
+        JButton buscarNomeButton = new JButton("Buscar pelo Nome");
+        buscarNomeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nome = nomeField.getText();
-                Pet pet = sistemaPet.buscarPet(nome);
+                Pet pet = sistemaPet.buscarPetNome(nome);
+                if (pet != null) {
+                    outputArea.setText("Nome: " + pet.getNome() + ", Espécie: " + pet.getEspecie() +", Idade: " + pet.getIdade() + ", Cor: " + pet.getCor());
+                } else {
+                    outputArea.setText("Pet não encontrado!");
+                }
+            }
+        });
+
+        JButton buscarEspecieButton = new JButton("Buscar pela Espécie");
+        buscarEspecieButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String especie = especieField.getText();
+                Pet pet = sistemaPet.buscarPetEspecie(especie);
                 if (pet != null) {
                     outputArea.setText("Nome: " + pet.getNome() + ", Espécie: " + pet.getEspecie() +", Idade: " + pet.getIdade() + ", Cor: " + pet.getCor());
                 } else {
@@ -92,7 +106,7 @@ public class SistemaPetShopGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nome = nomeField.getText();
-                Pet pet = sistemaPet.buscarPet(nome);
+                Pet pet = sistemaPet.buscarPetNome(nome);
                 if (pet != null) {
                     sistemaPet.removerPet(pet);
                     JOptionPane.showMessageDialog(SistemaPetShopGUI.this, "Pet removido com sucesso!");
@@ -104,7 +118,8 @@ public class SistemaPetShopGUI extends JFrame{
 
         inputPanel.add(adicionarButton);
         inputPanel.add(listarButton);
-        inputPanel.add(buscarButton);
+        inputPanel.add(buscarNomeButton);
+        inputPanel.add(buscarEspecieButton);
         inputPanel.add(removerButton);
 
         outputArea = new JTextArea();
